@@ -240,7 +240,7 @@ def prepare_cross_well_dataset(df1, df2, parameters, well1_name, well2_name):
 
 st.title("🌍 Groundwater Dashboard")
 
-uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx"])
+uploaded_file = "grundwasser_daten.xlsx"
 
 if uploaded_file:
     st.header("Well selection")
