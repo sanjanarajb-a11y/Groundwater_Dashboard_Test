@@ -48,15 +48,13 @@ CONTAMINANTS_SHEET = "Contaminants"
 # Edit Pathway 1 and Pathway 2 here if their exact compounds are different.
 # The code automatically skips compounds that are not present in the Excel sheet.
 PATHWAYS = {
-    # Change only the compound lists below if your exact pathway definitions differ.
-    # The dashboard automatically uses only compounds available in the Contaminants sheet.
     "Pathway 1": {
         "description": "Anaerobic microbial degradation",
         "compounds": ["PCE", "TCE", "cis-1,2-DCE", "VC", "Ethen"],
     },
     "Pathway 2": {
         "description": "Anaerobic microbial degradation",
-        "compounds": ["TCE", "cis-1,2-DCE", "VC", "Ethen"],
+        "compounds": ["PCE", "TCE", "trans-1,2-DCE", "VC", "Ethen"],
     },
     "Pathway 3": {
         "description": "Anaerobic microbial degradation",
@@ -64,16 +62,19 @@ PATHWAYS = {
     },
     "Pathway 4": {
         "description": "Anaerobic microbial degradation",
-        "compounds": ["PCE", "TCE", "trans-1,2-DCE", "VC", "Ethen"],
+        "compounds": ["1,1,2,2-TeCA", "1,1,2-TCA", "1,2-DCA", "VC", "Ethen"],
     },
 }
 
 COMPOUND_ALIASES = {
     "PCE": ["PCE", "Tetrachloroethene", "Tetrachloroethylene"],
     "TCE": ["TCE", "Trichloroethene", "Trichloroethylene"],
-    "cis-1,2-DCE": ["cis-1,2-DCE", "cis-1,2 DCE", "cis- Dichloroethylene", "cis-DCE"],
-    "trans-1,2-DCE": ["trans-1,2-DCE", "trans-1,2 DCE", "trans- Dichloroethylene", "trans-DCE"],
+    "cis-1,2-DCE": ["cis-1,2-DCE", "cis-1,2 DCE", "cis-Dichloroethylene", "cis- Dichloroethylene", "cis-DCE"],
+    "trans-1,2-DCE": ["trans-1,2-DCE", "trans-1,2 DCE", "trans-Dichloroethylene", "trans- Dichloroethylene", "trans-DCE"],
     "1,1-DCE": ["1,1-DCE", "1,1 DCE", "1,1-Dichloroethene", "1,1-Dichloroethylene"],
+    "1,2-DCA": ["1,2-DCA", "1,2-Dichloroethane"],
+    "1,1,2-TCA": ["1,1,2-TCA", "1,1,2-Trichloroethane"],
+    "1,1,2,2-TeCA": ["1,1,2,2-TeCA", "1,1,2,2-Tetrachloroethane"],
     "VC": ["VC", "Vinyl chloride", "Vinylchloride"],
     "Ethen": ["Ethen", "Ethene"],
 }
@@ -564,6 +565,7 @@ def plot_pathway_time_series(df, pathway_name, pathway_info, y_scale="linear"):
     ax.set_ylabel("Concentration [µg/L]", fontsize=12, fontweight="bold")
     ax.set_yscale(y_scale)
     ax.grid(True, which="both", alpha=0.3)
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d.%m.%y"))
     plt.xticks(rotation=45, ha="right")
     ax.legend(loc="best")
